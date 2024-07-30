@@ -9,8 +9,21 @@ const pool = require('../db'); // Assuming db.js exports the database pool
 // Get all users
 exports.getAllUsers = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM users');
-        res.json(result.rows);
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 100;
+        const offset = (page - 1) * limit;
+
+        const countResult = await pool.query('SELECT COUNT(*) FROM users');
+        const totalUsers = parseInt(countResult.rows[0].count);
+
+        const result = await pool.query('SELECT * FROM users OFFSET $1 LIMIT $2', [offset, limit]);
+        
+        res.json({
+            users: result.rows,
+            currentPage: page,
+            totalPages: Math.ceil(totalUsers / limit),
+            totalUsers: totalUsers
+        });
     } catch (error) {
         console.error('Error executing query:', error);
         res.status(500).send('Internal Server Error');

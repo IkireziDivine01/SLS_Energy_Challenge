@@ -16,7 +16,7 @@ const options = {
             },
         ],
     },
-    apis: ['../routes/user.js'], // Path to your API files
+    apis: ['../routes/user.js', '../routes/tweets.js', '../routes/hashtag.js'], // Path to your API files
 };
 
 const specs = swaggerJSDoc(options);
