@@ -6,7 +6,7 @@ const q2Controller = require('../controllers/q2Controller')
  * /q2:
  *   get:
  *     summary: Retrieve tweets based on interaction, hashtag, and keyword scoring
- *     tags: [Tweets]
+ *     tags: [Q2]
  *     description: Get tweets based on interaction with a user, hashtag frequency, and keyword matching. Results are scored and sorted by the calculated score.
  *     parameters:
  *       - in: query
@@ -51,6 +51,6 @@ const q2Controller = require('../controllers/q2Controller')
  *       500:
  *         description: Internal server error
  */
-router.get('/q2', q2Controller)
+router.get('/', q2Controller.handleQ2)
 
 module.exports = router;

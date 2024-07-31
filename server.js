@@ -26,6 +26,10 @@ const swaggerOptions = {
         ],
         tags: [
             {
+                name: 'Q2',
+                description: ''
+            },
+            {
                 name: 'Users',
                 description: 'User management'
             },
